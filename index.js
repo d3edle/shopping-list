@@ -11,7 +11,6 @@ app.use(express.json())
 // app.use(morgan('tiny'))
 app.use(express.static('dist'))
 
-// eslint-disable-next-line no-unused-vars
 app.get('/', (request, response, next) => {
   response.send('<h1>Hello World!</h1>')
 })
@@ -81,21 +80,21 @@ app.put('/api/items/:id', (request, response, next) => {
   const body = request.body
 
   Item.findById(request.params.id)
-  .then(item => {
-    if(!item) {
-      response.status(404).end()
-    }
-    
-    item.quantity = body.quantity
-    item.name = body.name
-    item.store = body.store
+    .then(item => {
+      if(!item) {
+        response.status(404).end()
+      }
+      
+      item.quantity = body.quantity
+      item.name = body.name
+      item.store = body.store
 
-    return item.save().then(updatedItem => {
-      response.json(updatedItem)
+      return item.save().then(updatedItem => {
+        response.json(updatedItem)
+      })
+        .catch(error => next(error))
+
     })
-    .catch(error => next(error))
-
-  })
 })
 
 

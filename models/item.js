@@ -15,28 +15,28 @@ mongoose.connect(url)
   })
 
 const itemSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        minlength: 1,
-        required: true
-    },
-    store: {
-        type: String,
-        minlength: 1,
-        required: true
-    },
-    quantity: {
-        type: Number,
-        minlength: 1,
-        required: true
-    }
+  name: {
+    type: String,
+    minlength: 1,
+    required: true
+  },
+  store: {
+    type: String,
+    minlength: 1,
+    required: true
+  },
+  quantity: {
+    type: Number,
+    minlength: 1,
+    required: true
+  }
 })
 
 itemSchema.set('toJSON', {
-    transform: (document, returnedObject) => {
-        returnedObject.id = returnedObject._id.toString()
-        delete returnedObject._id
-        delete returnedObject.__v
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
   }
 })
 
